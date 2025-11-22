@@ -1,97 +1,112 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>сосал</title>
-<style>
-    body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: sans-serif;
-        font-size: 48px;
-        font-weight: bold;
-        color: white;
-        position: relative;
-        overflow: hidden;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>сосал</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            background-color: #111;
+        }
 
-    /* Фон с флагами */
-    .background-flags {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: stretch;
-        justify-content: space-around;
-        padding: 20px; /* Отступы по краям */
-        box-sizing: border-box;
-        z-index: -1;
-        opacity: 0.6; /* Полупрозрачность для видимости текста */
-    }
+        .background-flags {
+            position: absolute;
+            /* Сдвиг для перекрытия краев при анимации */
+            top: -150px;
+            left: -150px;
+            width: calc(100% + 300px);
+            height: calc(100% + 300px);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            gap: 20px; 
+            z-index: -1;
+            opacity: 0.4;
+            
+            /* Медленная анимация движения */
+            animation: flyReverse 4s linear infinite;
+        }
 
-    /* Стиль флагов */
-    .flag {
-        flex: 1 1 30%; /* Позволяет флагам занимать примерно 30% ширины, адаптироваться */
-        margin: 10px; /* Отступы между флагами */
-        min-width: 150px;
-        height: 200px;
-        background-size: cover;
-        background-position: center;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
+        .flag {
+            width: 100px;
+            height: 60px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
 
-    /* Радужный флаг */
-    .rainbow {
-        background: linear-gradient(
-            #e40303 0%, #e40303 14.28%, 
-            #ff8c00 14.28%, #ff8c00 28.56%, 
-            #ffed00 28.56%, #ffed00 42.84%, 
-            #008026 42.84%, #008026 57.12%, 
-            #004dff 57.12%, #004dff 71.4%, 
-            #750787 71.4%, #750787 85.68%, 
-            #b52bde 85.68%, #b52bde 100%
-        );
-    }
-    /* Трансгендерный флаг */
-    .transgender {
-        background: linear-gradient(
-            #55CDFC 0%, #55CDFC 14.28%, 
-            #F7A8B8 14.28%, #F7A8B8 28.56%, 
-            #FFFFFF 28.56%, #FFFFFF 42.84%, 
-            #F7A8B8 42.84%, #F7A8B8 57.12%, 
-            #55CDFC 57.12%, #55CDFC 71.4%, 
-            #FFFFFF 71.4%, #FFFFFF 85.68%, 
-            #F7A8B8 85.68%, #F7A8B8 100%
-        );
-    }
-    /* Флаг двухсплавных */
-    .genderfluid {
-        background: linear-gradient(
-            #D60270 0%, #D60270 14.28%, 
-            #FF8C00 14.28%, #FF8C00 28.56%, 
-            #FFFF00 28.56%, #FFFF00 42.84%, 
-            #008026 42.84%, #008026 57.12%, 
-            #0000F9 57.12%, #0000F9 71.4%, 
-            #750787 71.4%, #750787 85.68%, 
-            #D60270 85.68%, #D60270 100%
-        );
-    }
-</style>
+        /* Движение по диагонали (вниз-вправо) */
+        @keyframes flyReverse {
+            0% {
+                transform: translate(-120px, -80px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="background-flags">
-    <div class="flag rainbow"></div>
-    <div class="flag transgender"></div>
-    <div class="flag genderfluid"></div>
-</div>
-<div style="z-index: 1;">сосал</div>
+    <div class="background-flags" id="bg-container"></div>
+
+    <div style="z-index: 1; position: relative; text-shadow: 3px 3px 0px #000;">сосал</div>
+
+    <script>
+        const container = document.getElementById('bg-container');
+        
+        // 1. Исправленный флаг радуги (6 цветов)
+        const rainbowFlag = `linear-gradient(
+            to bottom,
+            #E40303 0%,     #E40303 16.66%,
+            #FF8C00 16.66%, #FF8C00 33.33%,
+            #FFED00 33.33%, #FFED00 50%,
+            #008026 50%,    #008026 66.66%,
+            #004DFF 66.66%, #004DFF 83.33%,
+            #750787 83.33%, #750787 100%
+        )`;
+
+        // 2. Флаг Украины
+        const uaFlag = `linear-gradient(
+            to bottom,
+            #0057B7 0%, #0057B7 50%,
+            #FFDD00 50%, #FFDD00 100%
+        )`;
+
+        // Рассчитываем нужное количество флагов для заполнения экрана
+        const screenArea = (window.innerWidth + 300) * (window.innerHeight + 300);
+        const flagArea = 120 * 80; 
+        const count = Math.ceil(screenArea / flagArea) + 50;
+
+        for (let i = 0; i < count; i++) {
+            const div = document.createElement('div');
+            div.className = 'flag';
+            
+            // Логика вероятности:
+            // Math.random() выдает число от 0.0 до 1.0.
+            // Если число меньше 0.05 (это 5%), ставим флаг Украины.
+            // В остальных 95% случаев ставим Радугу.
+            if (Math.random() < 0.05) {
+                div.style.background = uaFlag;
+            } else {
+                div.style.background = rainbowFlag;
+            }
+            
+            container.appendChild(div);
+        }
+    </script>
 </body>
 </html>
